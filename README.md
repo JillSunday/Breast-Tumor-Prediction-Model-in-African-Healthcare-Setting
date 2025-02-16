@@ -13,6 +13,7 @@ This project addresses the challenge of breast tumor segmentation in African hea
 - [Results](#results)
 - [Predictions](#predictions)
 - [References](#references)
+- [Notebooks](#notebooks)
 - [License](#license)
 
 ---
@@ -78,6 +79,11 @@ The model successfully segmented tumors in images with historical multi-mask ann
 ![Prediction Comparison](https://github.com/JillSunday/Breast-Tumor-Prediction-Model-in-African-Healthcare-Setting/blob/main/Results/Example%204%20of%20prediction%20multiple%20tumors,%20with%20one%20tumor%20in%20the%20label.png?raw=true)
 
 ---
+ ## Breast Tumor Segmentation notebooks
+Click [here](https://colab.research.google.com/drive/1KUF-kezL-7IKZ5ILzuAnLusjez7G64A8?usp=sharing) to open the notebook in Google Colab.
+  
+The Python implementation of the model is available in [`python_script.py`](Notebook/breast_tumor_ultrasound_image_segmentation.py).
+ 
 
 ## References
 ### Dataset
