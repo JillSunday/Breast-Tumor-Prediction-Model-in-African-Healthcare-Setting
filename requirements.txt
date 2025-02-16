@@ -1,0 +1,21 @@
+pandas
+opencv-python
+matplotlib
+shutil
+imgaug
+numpy
+Pillow
+scipy
+SimpleITK
+batchgenerators
+nibabel
+random
+json
+
+# nnU-Net installation (not typically included in requirements.txt)
+# Manual installation steps:
+# git clone https://github.com/MIC-DKFZ/nnUNet.git /content/nnUNetFrame/nnUNet
+# cd /content/nnUNetFrame/nnUNet && pip install -e .
+
+# HiddenLayer installation
+git+https://github.com/FabianIsensee/hiddenlayer.git
