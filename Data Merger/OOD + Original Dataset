@@ -1,57 +1,45 @@
+#This is to merge the resized_images and synthesized_ood
 import os
-#Renaming the ood data such it it is a continuation from the original dataset to prevent duplicates
-# Directory containing synthesized OOD images and masks
-ood_images_dir = "/content/synthesized_data/ood_images"
-ood_masks_dir = "/content/synthesized_data/ood_masks"
+import shutil
 
-# Define the range for the new case numbers
-ood_start_index = 257
-ood_end_index = 262
+# Define paths
+resized_images_directory = '/content/resized_images'
+synthesized_data_directory = '/content/synthesized_data'
+merged_dataset_directory = '/content/merged_dataset'
+merged_images_directory = os.path.join(merged_dataset_directory, 'merged_images')
+merged_masks_directory = os.path.join(merged_dataset_directory, 'merged_masks')
 
-# Initialize a counter for the OOD cases
-ood_counter = 0
+# Create merged_dataset_directory if it doesn't exist
+os.makedirs(merged_dataset_directory, exist_ok=True)
+os.makedirs(merged_images_directory, exist_ok=True)
+os.makedirs(merged_masks_directory, exist_ok=True)
 
-# Iterate over the images directory
-for filename in os.listdir(ood_images_dir):
-    if filename.endswith(".png"):  
-        # Increment the counter
-        ood_counter += 1
+# Copy images from resized_images/images to merged_dataset/merged_images
+for filename in os.listdir(os.path.join(resized_images_directory, 'images')):
+    src = os.path.join(resized_images_directory, 'images', filename)
+    dst = os.path.join(merged_images_directory, filename)
+    shutil.copy(src, dst)
+    print(f"Copied image: {filename} to merged_images")
 
-        # Check if the counter is within the desired range
-        if 1 <= ood_counter <= 6:
-            # new filename
-            new_filename = f"case{ood_start_index + ood_counter - 1}.png"  
-            # full paths
-            old_filepath = os.path.join(ood_images_dir, filename)
-            new_filepath = os.path.join(ood_images_dir, new_filename)
+# Copy images from synthesized_data/ood_images to merged_dataset/merged_images
+for filename in os.listdir(os.path.join(synthesized_data_directory, 'ood_images')):
+    src = os.path.join(synthesized_data_directory, 'ood_images', filename)
+    dst = os.path.join(merged_images_directory, filename)
+    shutil.copy(src, dst)
+    print(f"Copied image: {filename} to merged_images")
 
-            # Rename the file
-            os.rename(old_filepath, new_filepath)
+# Copy masks from resized_images/masks to merged_dataset/merged_masks
+for filename in os.listdir(os.path.join(resized_images_directory, 'masks')):
+    src = os.path.join(resized_images_directory, 'masks', filename)
+    dst = os.path.join(merged_masks_directory, filename)
+    shutil.copy(src, dst)
+    print(f"Copied mask: {filename} to merged_masks")
 
-            # Print the renaming information
-            print(f"Renamed {filename} to {new_filename}")
+# Copy masks from synthesized_data/ood_masks to merged_dataset/merged_masks
+for filename in os.listdir(os.path.join(synthesized_data_directory, 'ood_masks')):
+    src = os.path.join(synthesized_data_directory, 'ood_masks', filename)
+    dst = os.path.join(merged_masks_directory, filename)
+    shutil.copy(src, dst)
+    print(f"Copied mask: {filename} to merged_masks")
 
-# Reset the counter for the masks
-ood_counter = 0
-
-# Iterate over the masks directory
-for filename in os.listdir(ood_masks_dir):
-    if filename.endswith(".png"):
-        # Increment the counter
-        ood_counter += 1
-
-        #counter is within the desired range
-        if 1 <= ood_counter <= 6:
-            # Construct the new filename
-            new_filename = f"case{ood_start_index + ood_counter - 1}_tumor.png"
-            # Construct the full paths
-            old_filepath = os.path.join(ood_masks_dir, filename)
-            new_filepath = os.path.join(ood_masks_dir, new_filename)
-
-            # Rename the file
-            os.rename(old_filepath, new_filepath)
-
-            # Print the renaming information
-            print(f"Renamed {filename} to {new_filename}")
-
-print("Renaming completed.")
+print("Merge completed successfully.")
