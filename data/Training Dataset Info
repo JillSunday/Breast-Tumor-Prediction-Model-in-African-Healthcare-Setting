@@ -1,0 +1,5 @@
+The dataset used to build this model is an open-source breast lesion ultasound dataset, containing ultrasound scans (images), as well as one or multiple masks (ground truth masks) for each and every image.
+This dataset can be found in The Cancer Imaging Archive (TCIA) website via this link : https://www.cancerimagingarchive.net/collection/breast-lesions-usg/. 
+However, since this dataset contains multiple masks for some images, the multiple masks (ie. casenumber_other1.png, casenumber_other2.png, casenumber_other3.png, and casenumber_other4.png) had to be removed from the dataset for simplicity purposes.
+The newly curated dataset can be found at this google drive link: https://drive.google.com/drive/folders/16hZbKotB_fjsvG79W_iFMuyvGLBbJFLt?usp=drive_link
+Futhermore, since nnU-Net was used in this study, the name of the images and masks had to be changed from ie case001.png to BT_001.nii.gz for the images and for the masks, from case001_tumor.png to BT_001_0000.nii.gz
